@@ -11,7 +11,7 @@ import java.util.List;
 
 public class CouponDTO {
 
-    @NotBlank
+    @NotBlank(message = "not have blank this value!")
     @Pattern(regexp = "\\d{44}", message = "code44 must contain exactly 44 digits")
     private String code44;
     private LocalDate purchaseDate;
