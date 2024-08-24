@@ -31,10 +31,10 @@ services:
       - 8081:8080
     entrypoint: >
       /bin/sh -c "
-      rm -rf /home/wiremock/mappings/* && 
+      rm -rf /home/wiremock/mappings/* &&
       echo '{
         \"request\": {
-          \"urlPathPattern\": \"/api/products/([0-9]+)\",
+          \"urlPathPattern\": \"/api/products/4565156131\",
           \"method\": \"GET\"
         },
         \"response\": {
@@ -44,7 +44,20 @@ services:
             \"Content-Type\": \"application/json\"
           }
         }
-      }' > /home/wiremock/mappings/SearchByEan.json && 
+      }' > /home/wiremock/mappings/ValidProduct.json &&
+      echo '{
+        \"request\": {
+          \"urlPathPattern\": \"/api/products/([0-9]+)\",
+          \"method\": \"GET\"
+        },
+        \"response\": {
+          \"status\": 404,
+          \"body\": \"{\\\"error\\\":\\\"Product not found\\\"}\",
+          \"headers\": {
+            \"Content-Type\": \"application/json\"
+          }
+        }
+      }' > /home/wiremock/mappings/InvalidProduct.json &&
       /docker-entrypoint.sh"
     networks:
       - felipe-network
