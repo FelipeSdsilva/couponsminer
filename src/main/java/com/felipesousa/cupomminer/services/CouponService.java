@@ -1,5 +1,6 @@
 package com.felipesousa.cupomminer.services;
 
+import com.felipesousa.cupomminer.config.rabbitmq.RabbitMQConfig;
 import com.felipesousa.cupomminer.dto.CouponDTO;
 import com.felipesousa.cupomminer.dto.CouponMinDTO;
 import com.felipesousa.cupomminer.dto.ProductDTO;
@@ -38,6 +39,7 @@ public class CouponService {
 
         couponEntity = couponRepository.save(couponEntity);
 
+        rabbitTemplate.convertAndSend(RabbitMQConfig.EXCHANGE_NAME, RabbitMQConfig.ROUTING_KEY, couponEntity);
 
         return new CouponMinDTO(couponEntity.getId(), "", couponEntity.getPurchaseDate(), "");
     }
