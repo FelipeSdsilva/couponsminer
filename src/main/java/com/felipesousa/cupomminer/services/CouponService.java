@@ -34,7 +34,7 @@ public class CouponService {
         for (ProductDTO product : coupon.getProducts()) {
             totalValue = totalValue.add(product.getUnitaryPrice().multiply(new BigDecimal(product.getQuantity())));
         }
-        if (!totalValue.equals(couponEntity.getTotalValue()))
+        if (!totalValue.equals(coupon.getTotalValue()))
             throw new TotalValueException("The total value of the coupon does not match the sum of the product values!");
 
         couponEntity = couponRepository.save(couponEntity);
