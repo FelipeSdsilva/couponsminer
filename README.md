@@ -14,15 +14,15 @@ Docker, Maven, PostgreSQL, RabbitMQ e Postman.
 - [x] Validar o formato do code44 (44 caracteres numéricos).
 - [x] Validar o CNPJ.
 - [x] Verificar se o valor total do cupom corresponde à soma dos valores dos produtos.
-- [ ] Validar o EAN e os preços dos produtos via uma API mock.
+- [x] Validar o EAN e os preços dos produtos via uma API mock.
 - [x] Persistir os dados válido e salvar os dados do cupom no banco de dados PostgreSQL.
-- [ ] Criar filas no RabbitMQ.
-- [ ] Publicar no serviço de pub/sub e enviar as informações do cupom válido para um serviço de pub/sub usando RabbitMQ.
+- [x] Criar filas no RabbitMQ.
+- [x] Publicar no serviço de pub/sub e enviar as informações do cupom válido para um serviço de pub/sub usando RabbitMQ.
 - [ ] Criar um listener: Receber dados do comprador via pub/sub e atualizar o banco de dados com essas informações.
 - [x] Implementação do Swagger e Bibliotecas de Validação
   Para melhorar o projeto.
 - [x] Criar Dockerfile do projeto.
-- [ ] Escrever testes unitários.
+- [ ] Escrever testes unitários Em andamento.
 
 
 ## Exemplo
