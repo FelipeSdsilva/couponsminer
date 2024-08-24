@@ -1,0 +1,62 @@
+services:
+  # ====================================================================================================================
+  # POSTGRES SERVER
+  # ====================================================================================================================
+  postgresql:
+    image: postgres:15-alpine
+    restart: always
+    environment:
+      TZ: America/Sao_Paulo
+      POSTGRES_USER: myuser
+      POSTGRES_PASSWORD: mypassword
+      POSTGRES_DB: cupomminer
+    ports:
+      - 5433:5432
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    networks:
+      - felipe-network
+
+  # ====================================================================================================================
+  # WIREMOCK SERVER
+  # ====================================================================================================================
+  wiremock:
+    image: "wiremock/wiremock:latest"
+    container_name: wiremock
+    volumes:
+      - ./extensions:/var/wiremock/extensions
+      - ./__files:/home/wiremock/__files
+      - ./mappings:/home/wiremock/mappings
+    ports:
+      - 8081:8080
+    entrypoint: >
+      /bin/sh -c "
+      rm -rf /home/wiremock/mappings/* && 
+      echo '{
+        \"request\": {
+          \"urlPathPattern\": \"/api/products/([0-9]+)\",
+          \"method\": \"GET\"
+        },
+        \"response\": {
+          \"status\": 200,
+          \"body\": \"{\\\"ean\\\":4565156131,\\\"ProductName\\\":\\\"Sabão Líquido OMO Lavagem Perfeita 500ml\\\",\\\"minPrice\\\":5,\\\"maxPrice\\\":25.35}\",
+          \"headers\": {
+            \"Content-Type\": \"application/json\"
+          }
+        }
+      }' > /home/wiremock/mappings/SearchByEan.json && 
+      /docker-entrypoint.sh"
+    networks:
+      - felipe-network
+
+  # ====================================================================================================================
+  # CUPOMMINER SERVER
+  # ====================================================================================================================
+
+
+volumes:
+  postgres-data:
+
+networks:
+  felipe-network:
+    driver: bridge
