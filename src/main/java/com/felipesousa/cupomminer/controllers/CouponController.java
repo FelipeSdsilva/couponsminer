@@ -3,6 +3,7 @@ package com.felipesousa.cupomminer.controllers;
 
 import com.felipesousa.cupomminer.dto.CouponDTO;
 import com.felipesousa.cupomminer.dto.CouponMinDTO;
+
 import com.felipesousa.cupomminer.services.CouponService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -23,10 +24,10 @@ public class CouponController {
 
     @PostMapping
     @Operation(description = "This endpoint included new coupon in the system if valid")
-    public ResponseEntity<CouponMinDTO> postNewCoupon(@Valid @RequestBody CouponDTO couponDTO) {
+    public ResponseEntity<CouponMinDTO> postNewCoupon(@Valid @RequestBody CouponDTO couponDTO) throws Exception {
         CouponMinDTO minDTO = couponService.saveCoupon(couponDTO);
         var uri = fromCurrentRequest().path("/{id}").buildAndExpand(minDTO.getCouponId()).toUri();
-        return ResponseEntity.created(uri).body(null);
+        return ResponseEntity.created(uri).body(minDTO);
     }
 
 }
