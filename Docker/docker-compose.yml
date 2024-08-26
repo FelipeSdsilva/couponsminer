@@ -1,5 +1,25 @@
 services:
   # ====================================================================================================================
+  # RABBITMQ SERVER
+  # ====================================================================================================================
+  rabbitmq:
+    image: rabbitmq:3-management-alpine
+    container_name: 'rabbitmq'
+    ports:
+      - 5672:5672
+      - 15672:15672
+    volumes:
+      - ~/.docker-conf/rabbitmq/data/:/var/lib/rabbitmq/
+      - ~/.docker-conf/rabbitmq/log/:/var/log/rabbitmq
+    networks:
+      - felipe-network
+    healthcheck:
+      test: [ "CMD-SHELL", "rabbitmq-diagnostics -q check_running" ]
+      interval: 10s
+      retries: 5
+      start_period: 30s
+      timeout: 5s
+  # ====================================================================================================================
   # POSTGRES SERVER
   # ====================================================================================================================
   postgresql:
@@ -65,23 +85,30 @@ services:
   # ====================================================================================================================
   # CUPOMMINER SERVER
   # ====================================================================================================================
+  cupomminer:
+    image: felipesoulsa/cupomminer:1.1.0
+    restart: always
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgresql:5432/cupomminer
+      SPRING_DATASOURCE_USERNAME: myuser
+      SPRING_DATASOURCE_PASSWORD: mypassword
+      SPRING_DATASOURCE_DRIVER-CLASS-NAME: org.postgresql.Driver
 
+      SPRING_RABBITMQ_HOST: rabbitmq
+      SPRING_RABBITMQ_PORT: 5672
+      SPRING_RABBITMQ_USERNAME: guest
+      SPRING_RABBITMQ_PASSWORD: guest
+      SPRING_AMQP_DESERIALIZATION_TRUST_ALL: true
 
-  # ====================================================================================================================
-  # RABBITMQ SERVER
-  # ====================================================================================================================
-  rabbitmq:
-    image: rabbitmq:3-management-alpine
-    container_name: 'rabbitmq'
+    depends_on:
+      - postgresql
+      - rabbitmq
+      - wiremock
     ports:
-      - 5672:5672
-      - 15672:15672
-    volumes:
-      - ~/.docker-conf/rabbitmq/data/:/var/lib/rabbitmq/
-      - ~/.docker-conf/rabbitmq/log/:/var/log/rabbitmq
+      - 8080:8080
+
     networks:
       - felipe-network
-
 
 volumes:
   postgres-data:
