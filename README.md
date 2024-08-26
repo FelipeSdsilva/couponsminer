@@ -18,11 +18,11 @@ Docker, Maven, PostgreSQL, RabbitMQ e Postman.
 - [x] Persistir os dados válido e salvar os dados do cupom no banco de dados PostgreSQL.
 - [x] Criar filas no RabbitMQ.
 - [x] Publicar no serviço de pub/sub e enviar as informações do cupom válido para um serviço de pub/sub usando RabbitMQ.
-- [ ] Criar um listener: Receber dados do comprador via pub/sub e atualizar o banco de dados com essas informações.
+- [x] Criar um listener: Receber dados do comprador via pub/sub e atualizar o banco de dados com essas informações.
 - [x] Implementação do Swagger e Bibliotecas de Validação
   Para melhorar o projeto.
 - [x] Criar Dockerfile do projeto.
-- [ ] Escrever testes unitários Em andamento.
+- [x] Escrever testes unitários Em andamento.
 
 
 ## Exemplo
