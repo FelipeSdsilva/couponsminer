@@ -1,0 +1,61 @@
+{
+	"info": {
+		"_postman_id": "30195b9d-5458-42b0-bdb9-738e1bd85d8b",
+		"name": "New Collection",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "14866871",
+		"_collection_link": "https://dark-flare-776886.postman.co/workspace/ChallengeHUB~0d5df843-770c-4db1-8fcd-2e744607b491/collection/14866871-30195b9d-5458-42b0-bdb9-738e1bd85d8b?action=share&source=collection_link&creator=14866871"
+	},
+	"item": [
+		{
+			"name": "Salvar cupom",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"code44\": \"45645416516156156116516515161651561651564564\",\r\n    \"purchaseDate\": \"2024-02-01\",\r\n    \"totalValue\": 92.00,\r\n    \"companyDocument\": 68733752000103,\r\n    \"State\": \"SP\",\r\n    \"products\": [\r\n        {\r\n            \"name\": \"Sabão Líquido OMO Lavagem Perfeita 500ml\",\r\n            \"ean\": 4565156131,\r\n            \"unitaryPrice\": 10.20,\r\n            \"quantity\": 5\r\n        },\r\n        {\r\n            \"name\": \"CIF Multiuso Cremoso 450ml\",\r\n            \"ean\": 4565156131,\r\n            \"unitaryPrice\": 8.20,\r\n            \"quantity\": 5\r\n        }\r\n    ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}/coupons",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"coupons"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Consultar produto via apimock",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "some-header",
+						"value": "some-value"
+					}
+				],
+				"url": {
+					"raw": "{{ApiMock}}/api/products/456515613",
+					"host": [
+						"{{ApiMock}}"
+					],
+					"path": [
+						"api",
+						"products",
+						"456515613"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

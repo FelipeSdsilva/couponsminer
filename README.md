@@ -22,7 +22,7 @@ Docker, Maven, PostgreSQL, RabbitMQ e Postman.
 - [x] Implementação do Swagger e Bibliotecas de Validação
   Para melhorar o projeto.
 - [x] Criar Dockerfile do projeto.
-- [x] Escrever testes unitários Em andamento.
+- [x] Escrever testes unitários.
 
 
 ## Exemplo
@@ -76,13 +76,43 @@ será retornado uma resposta do servidor com o seguinte corpo (body).
 
 # Documentação do funcionamento da API.
 
+
+Para acessar a documentção precisa exceutar o projeto primeiramente
+
+passos para rodar o projeto.
+
+1 - clonar o projeto.
+
+```bash
+git clone https://github.com/FelipeSdsilva/couponsminer.git
 ```
-Quando for executado o comando docker compose up -d ele rodara 
-automaticamente para isso é necessario que tenha 'Docker' instalado.
 
-Caso não tenha é só seguir esses passos do video abaixo.
-
+2 - Após clonar pode ser tanto executado terá que ter o docker instalado na sua maquina e exceutar o seguintes comandos.
+dentro da pasta Docker.
 
 ```
+docker compose up -d 
+```
 
+3 - Reinicie o serviço do cupomminer com o comando.
+```
+docker compose restart cupomminer
+```
+
+4 - Baixar os arquivos do postman para testes na raiz do projeto.
+
+Enviroment
+[CupomminerENV.postman_environment.json](CupomminerENV.postman_environment.json)
+
+Collection(Requests)
+[New Collection.postman_collection.json](New%20Collection.postman_collection.json)
+
+
+5 - Foi implementado o Swagger para uma documentação mais comunicativa.
+
+```
+http://localhost:8080/swagger-ui.html
+```
+
+Para qualquer dúvida me coloco a disposição para esclarecer e explicar o que foi desenvolvido.
 
